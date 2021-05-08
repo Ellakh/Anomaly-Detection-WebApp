@@ -15,7 +15,7 @@ app.get("/", (req,res)=>{
 
 app.post("/search", (req, res)=>{
     res.write('searching for '+req.body.key+':\n')
-    var key = req.body.key
+    const key = req.body.key;
     if(req.files){
         var file = req.files.text_file
         var result = model.searchText(key, file.data.toString())
