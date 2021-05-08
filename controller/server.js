@@ -4,7 +4,7 @@ const model = require('../model/SearchInFile')
 function displayFormCommand(req, res){
     fs.readFile('../view/index.html','utf8', (err, data)=>{
         if(err) {
-            console.log(err)
+            console.error(err)
             return
         }
         else{
