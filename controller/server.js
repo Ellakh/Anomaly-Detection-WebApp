@@ -2,7 +2,7 @@ const http = require('http')
 const fs = require('fs')
 const model = require('../model/SearchInFile')
 function displayFormCommand(req, res){
-    fs.readFile('../view/index.html','utf8', (err, data)=>{
+    fs.readFile('../view/index12333.html','utf8', (err, data)=>{
         if(err) {
             console.error(err)
             return
