@@ -1,24 +1,29 @@
+//extensions(???) used for the web app???
 const express = require('express')
 const fileUpload = require('express-fileupload')
-const model = require('../model/SearchInFile')
 
+//The businessLogic of the webapp
+const model = require('../model/AnomalyDetectionModel')
+//the webapp itself?
 const app = express()
+
 app.use(express.urlencoded({
     extended: false
 }))
 
 app.use(fileUpload())
+
 app.use(express.static("../view"))
-app.get("/", (req,res)=>{
-    res.sendFile("./index.html")
+app.get('/', (req,res)=>{
+    res.sendFile("./index12333.html")
 })
 
-app.post("/search", (req, res)=>{
-    res.write('searching for '+req.body.key+':\n')
-    const key = req.body.key;
+app.post('/detect', (req, res)=>{
+    res.write('searching for ' + req.body.key+':\n')
+    let key = req.body.key;
     if(req.files){
         var file = req.files.text_file
-        var result = model.searchText(key, file.data.toString())
+        var result = model.findAnomaly(key, file.data.toString())
         res.write(result)
     }
     res.end()
