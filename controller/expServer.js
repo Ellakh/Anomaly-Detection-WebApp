@@ -21,14 +21,14 @@ app.get('/', (req,res)=>{
 
 app.post('/detect', (req, res)=>{
     //req.body.
-/*res.write('searching for ' + req.body.key+':\n')
+res.write('searching for ' + req.body.key+':\n')
 let key = req.body.key
 if(req.files){
     var file = req.files.text_file
     var result = model.findAnomaly(key, file.data.toString())
     res.write(result)
 }
-res.end()*/
+res.end()
 
 })
 app.listen(8080)
