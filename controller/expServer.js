@@ -15,23 +15,26 @@ app.use(fileUpload())
 
 app.use(express.static("../view"))
 app.get('/', (req,res)=>{
-    res.sendFile("./index12333.html")
+    //check if should be a dot instead of /(!!!)
+    res.sendFile("/public/index.html")
 })
 
 app.post('/detect', (req, res)=>{
-    res.write('searching for ' + req.body.key+':\n')
-    let key = req.body.key;
-    if(req.files){
-        var file = req.files.text_file
-        var result = model.findAnomaly(key, file.data.toString())
-        res.write(result)
-    }
-    res.end()
+    //req.body.
+res.write('searching for ' + req.body.key+':\n')
+let key = req.body.key
+if(req.files){
+    var file = req.files.text_file
+    var result = model.findAnomaly(key, file.data.toString())
+    res.write(result)
+}
+res.end()
+
 })
 app.listen(8080)
 /*
 app.get()
 app.post()
-app.put()
+app.t()
 app.delete()
- */
+*/
