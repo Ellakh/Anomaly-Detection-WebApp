@@ -1,30 +1,48 @@
 import './App.css';
+import Select from "react-select";
+import React,{Component} from "react";
+import ResultData from './ResultJson';
+
+const options=[
+    {label:"Hybrid",value:'op1'},
+    {label:"Register",value:'op2'}
+]
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Anomaly Detection Server</h1>
+        <h2>Anomaly Detection Server</h2>
       </header>
-      <form action="/detect" method="POST" encType="multipart/form-data" Name="searchFrom" target="result">
-        <table className="tableFile" >
+      <form action="/detect" method="POST" encType="multipart/form-data" name="searchFrom" target="result" className="search_From">
+        <table name="tableFile" className="Table_File">
           <tr>
-            <td><input type="file" Name="normal_file"/></td>
+            <td><input type="file" name="normal_file"/></td>
             <td>קובץ טיסה רגילה</td>
           </tr>
           <tr>
-            <td><input type="file" Name="test_file"/></td>
+            <td><input type="file" name="test_file"/></td>
             <td>קובץ טיסה לבדיקה</td>
           </tr>
         </table>
 
           <div>
-            <input type="submit" value="UPLOAD" Name="submit"/>
+              <Select name="select" className="select_" placeholder={'select detection type'}
+               isSearchable={false} options={options}>
+              </Select>
+          </div>
+
+          <div>
+            <input type="submit" value="UPLOAD" name="submit"/>
           </div>
       </form>
+        <h3>Anomaly List</h3>
+        <div name="resultTemp" className="resultTemp_">
+            <ResultData></ResultData>
+        </div>
 
       <div>
-        <iframe Name="result" width="80%" height="500">Result will be here.</iframe>
+        <iframe name="result" width="80%" height="190" className="result_">""</iframe>
       </div>
 
     </div>
