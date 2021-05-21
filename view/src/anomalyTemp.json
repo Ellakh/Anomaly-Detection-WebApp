@@ -1,0 +1,14 @@
+{
+  "anomalies": [
+    {
+      "col_name_2": "A - B",
+      "time_step": "0:55",
+      "description": "bla bla"
+    },
+    {
+      "col_name_2": "span_1 - span_2",
+      "time_step": "time",
+      "description": "description"
+    }
+  ]
+}
