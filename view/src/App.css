@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: lightgreen;
+  height: 100%;
 }
 
 .App-logo {
@@ -62,15 +62,11 @@
   left: -259px;
 }
 
-.result_{
-  background-color: whitesmoke;
-}
-
-.ResultTableTR_{
+.ResultTableTH_{
   border: 1px solid;
 }
 
-.resultTemp_{
+.result_{
   background-color: whitesmoke;
   width: 80%;
   padding: 5px;

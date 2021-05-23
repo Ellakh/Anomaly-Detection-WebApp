@@ -1,11 +1,11 @@
 import './App.css';
 import Select from "react-select";
-import React,{Component} from "react";
+import React from "react";
 import ResultData from './ResultJson';
 
 const options=[
     {label:"Hybrid",value:'op1'},
-    {label:"Register",value:'op2'}
+    {label:"Regression",value:'op2'}
 ]
 
 function App() {
@@ -35,15 +35,13 @@ function App() {
           <div>
             <input type="submit" value="UPLOAD" name="submit"/>
           </div>
+
       </form>
+
         <h3>Anomaly List</h3>
-        <div name="resultTemp" className="resultTemp_">
+        <div name="result" className="result_">
             <ResultData></ResultData>
         </div>
-
-      <div>
-        <iframe name="result" width="80%" height="190" className="result_">""</iframe>
-      </div>
 
     </div>
   );
