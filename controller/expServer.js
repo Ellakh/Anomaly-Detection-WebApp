@@ -24,15 +24,9 @@ app.post('/detect', (req, res)=>{
     if(req.files){
         var reg_flight = req.files.normal_file
         var fileWithAnomalies = req.files.test_file
-
-        model.learnNormal(anomallyDetectionMethod, reg_flight.data.toString())
-        var requestData = model.findAnomaly(anomallyDetectionMethod, fileWithAnomalies.data.toString())
-        //res.
+        model.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
     }
-
-
     res.end()
-
 })
 app.listen(8080)
 /*
