@@ -14,8 +14,8 @@ function App() {
       <header className="App-header">
         <h2>Anomaly Detection Server</h2>
       </header>
-      <form action="/detect" method="POST" encType="multipart/form-data" name="searchFrom" target="result" className="search_From">
-        <table name="tableFile" className="Table_File">
+      <form action="/detect" method="post" encType="multipart/form-data" name="searchFrom" target="result">
+        <table className="Table_File">
           <tr>
             <td><input type="file" name="normal_file"/></td>
             <td>קובץ טיסה רגילה</td>
@@ -39,8 +39,8 @@ function App() {
       </form>
 
         <h3>Anomaly List</h3>
-        <div name="result" className="result_">
-            <ResultData></ResultData>
+        <div className="result_">
+            <ResultData/>
         </div>
 
     </div>
