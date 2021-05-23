@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import data from "./anomalyTemp";
+import data from "../../model/anomalies";
 
 class ResultData extends Component {
     render() {
@@ -7,9 +7,8 @@ class ResultData extends Component {
             <div>
                 <table width="100%">
                     <tr>
-                        <th className="ResultTableTH_">Name</th>
-                        <th className="ResultTableTH_">Time Step</th>
-                        <th className="ResultTableTH_">Description</th>
+                        <th className="ResultTableTH_">Feature</th>
+                        <th className="ResultTableTH_">Time Steps</th>
                     </tr>
                 {
                     data.anomalies.map((anomaly, i) => {
@@ -17,7 +16,6 @@ class ResultData extends Component {
                             <tr key={i}>
                                 <th className="ResultTableTH_">{anomaly.col_name} </th>
                                 <th className="ResultTableTH_"> {anomaly.time_step} </th>
-                                <th className="ResultTableTH_"> {anomaly.description}</th>
                             </tr>
                         );
                     })
