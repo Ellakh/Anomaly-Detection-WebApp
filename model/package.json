@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bson": "^4.4.0",
+    "glob": "^7.1.7",
+    "line-reader": "^0.4.0",
+    "main": "^1000.0.1",
+    "nan": "^2.14.2",
+    "node-gyp": "^8.0.0",
+    "node-gyp-build": "^4.2.3",
+    "nopt": "^5.0.0"
+  },
+  "name": "main",
+  "version": "1.0.0",
+  "main": "AnomalyDetectionModel.js",
+  "scripts": {
+    "install": "node-gyp clean configure build"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
