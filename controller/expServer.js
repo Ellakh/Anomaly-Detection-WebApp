@@ -1,6 +1,7 @@
 //extensions(???) used for the web app???
 const express = require('express')
 const fileUpload = require('express-fileupload')
+const fs = require('fs');
 
 //The businessLogic of the webapp
 const model = require('../model/AnomalyDetectionModel')
