@@ -1,7 +1,7 @@
 const anomalyDetector = require("./build/Release/main");
 const fs = require("fs");
 
-detectAnomalies("regression", "reg_flight.csv", "anomaly_flight.csv")
+//detectAnomalies("regression", "reg_flight.csv", "anomaly_flight.csv")
 
 function detectAnomalies(detectorType, normalFileName, anomalyFileName) {
 	anomalyDetector.detect(detectorType, normalFileName, anomalyFileName, function (err,res) {
