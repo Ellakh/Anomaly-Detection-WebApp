@@ -1,7 +1,7 @@
 import './App.css';
 import Select from "react-select";
 import React from "react";
-import ResultData from '../../controller/ResultJson';
+import ResultData from './ResultJson';
 
 const options=[
     {label:"Hybrid",value:'op1'},

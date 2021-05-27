@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import data from "../model/anomalies.json";
+import data from "./anomalies";
 
 class ResultData extends Component {
     render() {
