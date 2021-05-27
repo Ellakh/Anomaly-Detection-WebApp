@@ -1,6 +1,7 @@
 //extensions(???) used for the web app???
 const express = require('express')
 const fileUpload = require('express-fileupload')
+const fs = require('fs');
 
 //The businessLogic of the webapp
 const model = require('../model/AnomalyDetectionModel')
@@ -25,6 +26,10 @@ app.post('/detect', (req, res)=>{
         var reg_flight = req.files.normal_file
         var fileWithAnomalies = req.files.test_file
         model.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
+        fs.copyFile("anomalies.json", "../view/src/anomalies.json", (err) => {
+            if (err) throw err;
+            console.log("anomalies.json was copied");
+        });
     }
     res.end()
 })
