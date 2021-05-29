@@ -2,22 +2,24 @@
 const express = require('express')
 const fileUpload = require('express-fileupload')
 const fs = require('fs');
-
+var bodyParser = require('body-parser');
+//const detectAnomalies = require("../model/AnomalyDetectionModel.js");
+//let class11= require("../model/AnomalyDetectionModel.js");
 //The businessLogic of the webapp
-const model = require('../model/AnomalyDetectionModel')
+const model1 = require('../model/AnomalyDetectionModel');
 //the webapp itself?
 const app = express()
 
 app.use(express.urlencoded({
     extended: false
 }))
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(fileUpload({}))
 
-app.use(fileUpload())
-
-app.use(express.static("../view"))
+app.use(express.static("../view/public"))
 app.get('/', (req,res)=>{
     //check if should be a dot instead of /(!!!)
-    res.sendFile("/public/index.html")
+    res.sendFile("./index.html")
 })
 
 app.post('/detect', (req, res)=>{
@@ -25,15 +27,16 @@ app.post('/detect', (req, res)=>{
     if(req.files){
         var reg_flight = req.files.normal_file
         var fileWithAnomalies = req.files.test_file
-        model.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
+        model1.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
         fs.copyFile("anomalies.json", "../view/src/anomalies.json", (err) => {
             if (err) throw err;
             console.log("anomalies.json was copied");
         });
     }
+    //res.write("dfdf")
     res.end()
 })
-app.listen(8080)
+app.listen(3000)
 /*
 app.get()
 app.post()
