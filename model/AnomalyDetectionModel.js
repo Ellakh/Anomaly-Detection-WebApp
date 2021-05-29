@@ -1,3 +1,5 @@
+//import App from "../view/src/App";
+
 const anomalyDetector = require("./build/Release/main");
 const fs = require("fs");
 
@@ -31,3 +33,6 @@ function detectAnomalies(detectorType, normalFile, anomalyFile) {
 	    }
 	})
 }
+module.exports.detectAnomalies = detectAnomalies
+module.exports.anomalyDetector = anomalyDetector
+module.exports.fs = fs

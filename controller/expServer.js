@@ -1,41 +1,65 @@
 //extensions(???) used for the web app???
-const express = require("express")
-const fileUpload = require("express-fileupload")
-const fs = require("fs");
-//const form = require("form-data")
-//The businessLogic of the webapp
-const model = require("../model/AnomalyDetectionModel")
-//the webapp itself?
-const app = express()
+//import App from "../view/src/App";
 
+const express = require('express')
+const fileUpload = require('express-fileupload')
+const fs = require('fs');
+var bodyParser = require('body-parser');
+
+
+const cors = require('cors');
+
+const app = express();
+
+//use cors to allow cross origin resource sharing
+app.use(
+    cors({
+        origin: 'http://localhost:8080/',
+        credentials: true,
+    })
+);
+
+
+app.use(express.json());
+//const detectAnomalies = require("../model/AnomalyDetectionModel.js");
+//let class11= require("../model/AnomalyDetectionModel.js");
+//The businessLogic of the webapp
+
+//the webapp itself?
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+const model1 = require('../model/AnomalyDetectionModel');
 app.use(express.urlencoded({
     extended: false
 }))
 
 app.use(fileUpload({}))
 
-app.use(express.static("view"))
+app.use(express.static("../view/public"))
 app.get('/', (req,res)=>{
     //check if should be a dot instead of /(!!!)
-    res.sendFile("/src/App.js")
+    res.sendFile("./index.html")
 })
 
-app.post("/detect", (req, res) => {
-    if(req.files) {
-        let anomalyDetectionMethod = get("selectDetection")
-        let reg_file = req.body.root //.files.normal_file //req.files.normal_file
-        let fileWithAnomalies = req.files.test_file //req.files.test_file
-        model.detectAnomalies(anomalyDetectionMethod, reg_file, fileWithAnomalies)
+app.post('/detect', (req, res)=>{
+
+    console.log("MAGNIVIM");
+    let anomallyDetectionMethod = req.body.select1
+    res.write("dfdf")
+    if(req.files){
+        var reg_flight = req.body.normal_file
+        var fileWithAnomalies = req.body.test_file
+        model1.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
         fs.copyFile("anomalies.json", "../view/src/anomalies.json", (err) => {
-            if (err) {
-                throw err
-            }
-        })
-        //res.write("")
+            if (err) throw err;
+            console.log("anomalies.json was copied");
+        });
     }
+    //res.write("dfdf")
     res.end()
 })
-app.listen(8080)
+app.listen(3000)
 /*
 app.get()
 app.post()
