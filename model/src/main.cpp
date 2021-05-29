@@ -30,24 +30,26 @@ NAN_MODULE_INIT(init) {
 
 void AnomalyWorker::Execute() {
 	TimeSeriesAnomalyDetector* detector;
-	if (this->detectType == "regression") {
+	if (this->detectType == "Regression") {
 		detector = new SimpleAnomalyDetector();
 	} else {
 		detector = new HybridAnomalyDetector();
-	}	
+	}
 	detector->learnNormal(TimeSeries(&(this->normal[0])));
 	vector<AnomalyReport> reports = detector->detect(TimeSeries(&(this->anomaly[0])));
     //std::string prevDescription = "";
+    //AnomalyReport prev("",-1);
 	std::string anomalyJsonStr = "{\n  \"anomalies\": [";
-	
+	//bool endSpan = false;
     for (AnomalyReport r : reports) {
-		anomalyJsonStr += "\n    {\n      \"feature\": \"";
-		anomalyJsonStr += r.description;
-		anomalyJsonStr += "\",\n      \"Timestemp\": \"";
-		anomalyJsonStr += std::to_string(r.timeStep);
-		anomalyJsonStr += "\"\n    },";
+        //if (r.description != prev.description && r.timeStep != prev.timeStep && endSpan) {
+		    anomalyJsonStr += "\n    {\n      \"feature\": \"";
+		    anomalyJsonStr += r.description;
+		    anomalyJsonStr += "\",\n      \"Timestemp\": \"";
+		    anomalyJsonStr += std::to_string(r.timeStep);
+		    anomalyJsonStr += "\"\n    },";
+		//}
 	}
-    
     /*
     if (reports.size() == 1) {
         anomalyJsonStr += "\n    {\n      \"features\": \"";

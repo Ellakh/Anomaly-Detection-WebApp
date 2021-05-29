@@ -1,10 +1,10 @@
 //extensions(???) used for the web app???
-const express = require('express')
-const fileUpload = require('express-fileupload')
-const fs = require('fs');
-
+const express = require("express")
+const fileUpload = require("express-fileupload")
+const fs = require("fs");
+//const form = require("form-data")
 //The businessLogic of the webapp
-const model = require('../model/AnomalyDetectionModel')
+const model = require("../model/AnomalyDetectionModel")
 //the webapp itself?
 const app = express()
 
@@ -12,24 +12,26 @@ app.use(express.urlencoded({
     extended: false
 }))
 
-app.use(fileUpload())
+app.use(fileUpload({}))
 
-app.use(express.static("../view"))
+app.use(express.static("view"))
 app.get('/', (req,res)=>{
     //check if should be a dot instead of /(!!!)
-    res.sendFile("/public/index.html")
+    res.sendFile("/src/App.js")
 })
 
-app.post('/detect', (req, res)=>{
-    let anomallyDetectionMethod = req.body.key
-    if(req.files){
-        var reg_flight = req.files.normal_file
-        var fileWithAnomalies = req.files.test_file
-        model.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
+app.post("/detect", (req, res) => {
+    if(req.files) {
+        let anomalyDetectionMethod = get("selectDetection")
+        let reg_file = req.body.root //.files.normal_file //req.files.normal_file
+        let fileWithAnomalies = req.files.test_file //req.files.test_file
+        model.detectAnomalies(anomalyDetectionMethod, reg_file, fileWithAnomalies)
         fs.copyFile("anomalies.json", "../view/src/anomalies.json", (err) => {
-            if (err) throw err;
-            console.log("anomalies.json was copied");
-        });
+            if (err) {
+                throw err
+            }
+        })
+        //res.write("")
     }
     res.end()
 })

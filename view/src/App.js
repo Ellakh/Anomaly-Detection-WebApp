@@ -1,7 +1,8 @@
 import './App.css';
 import Select from "react-select";
 import React from "react";
-import ResultData from './ResultJson';//'../controller/ResultJson';
+import ResultData from './ResultJson';
+import { useState } from 'react';
 
 const options=[
     {label:"Hybrid",value:'op1'},
@@ -9,27 +10,28 @@ const options=[
 ]
 
 function App() {
+    const [selectDetection, setSelectDetection] = useState("")
   return (
     <div className="App">
       <header className="App-header">
         <h2>Anomaly Detection Server</h2>
       </header>
 
-      <form action="/detect" method="post" encType="multipart/form-data" name="searchFrom" target="result" className="form_">
+      <form action="/detect" method="POST" encType="multipart/form-data" name="searchFrom" target="result" className="form_">
         <table className="Table_File">
           <tr>
-            <td><input type="file" name="normal_file"/></td>
+            <td><input name="norm_file" type="file"/></td>
             <td>קובץ טיסה רגילה</td>
           </tr>
           <tr>
-            <td><input type="file" name="test_file"/></td>
+            <td><input name="test_file" type="file"/></td>
             <td>קובץ טיסה לבדיקה</td>
           </tr>
         </table>
 
           <div>
-              <Select name="select" className="select_" placeholder={'select detection type'}
-               isSearchable={false} options={options}>
+              <Select name="selectDetect" className="select_" placeholder={'select detection type'}
+               isSearchable={false} options={options} onChange={setSelectDetection}>
               </Select>
           </div>
 

@@ -23,5 +23,8 @@
     "express-fileupload": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "form-data": "^4.0.0"
   }
 }
