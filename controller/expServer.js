@@ -1,4 +1,6 @@
 //extensions(???) used for the web app???
+//import App from "../view/src/App";
+
 const express = require('express')
 const fileUpload = require('express-fileupload')
 const fs = require('fs');
@@ -23,7 +25,8 @@ app.get('/', (req,res)=>{
 })
 
 app.post('/detect', (req, res)=>{
-    let anomallyDetectionMethod = req.body.key
+
+    let anomallyDetectionMethod = req.files.select1
     if(req.files){
         var reg_flight = req.files.normal_file
         var fileWithAnomalies = req.files.test_file
