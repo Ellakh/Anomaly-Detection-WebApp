@@ -46,7 +46,12 @@ In addition the user will receive a json file that includes a report of where th
        <li> `npm create-react-app` </li>
        <li> `npm react-select` </li>
        <li> `npm install axios --save` </li>
-    
+ <h2>How to run server?</h2>
+ <div>open the terminal/cmd</div>
+ <li> `cd ~/DirApplication/controller`</li>
+ <li> `npm run dev`</li>
+ <li> `cd ~/DirApplication/view`</li>
+ <li> `npm start` </li>
 <h2>The Website is running!</h2>
 <h3>open next link on the browser:</h3>
  <a href ="http://localhost:8080/">http://localhost:8080/</a>
