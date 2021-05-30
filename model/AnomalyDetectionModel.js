@@ -24,5 +24,5 @@ function detectAnomalies(detectorType, normalFileName, anomalyFileName) {
 	})
 }
 module.exports.detectAnomalies = detectAnomalies
-module.exports.anomalyDetector = anomalyDetector
-module.exports.fs = fs
+//module.exports.anomalyDetector = anomalyDetector
+//module.exports.fs = fs

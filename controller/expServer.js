@@ -1,16 +1,29 @@
 //extensions(???) used for the web app???
 //import App from "../view/src/App";
-
+const path = require('path');
 const express = require('express')
 const fileUpload = require('express-fileupload')
 const fs = require('fs');
 var bodyParser = require('body-parser');
+//var multer  = require('multer')
+//var upload  = multer({ dest: 'uploads/' })
+//const storage = multer.diskStorage({
+//    destination: function(req, file, cb) {
+//        cb(null, 'uploads/');
+//    },
+
+    // By default, multer removes file extensions so let's add them back
+//    filename: function(req, file, cb) {
+//        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//    }
+//});
+
 
 
 const cors = require('cors');
 
 const app = express();
-
+//require('dotenv').load();
 //use cors to allow cross origin resource sharing
 app.use(
     cors({
@@ -28,7 +41,7 @@ app.use(express.json());
 //the webapp itself?
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 const model1 = require('../model/AnomalyDetectionModel');
 app.use(express.urlencoded({
     extended: false
@@ -44,20 +57,33 @@ app.get('/', (req,res)=>{
 
 app.post('/detect', (req, res)=>{
 
-    console.log("MAGNIVIM");
-    let anomallyDetectionMethod = req.body.select1
-    res.write("dfdf")
-    if(req.files){
-        var reg_flight = req.body.normal_file
-        var fileWithAnomalies = req.body.test_file
-        model1.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
-        fs.copyFile("anomalies.json", "../view/src/anomalies.json", (err) => {
-            if (err) throw err;
-            console.log("anomalies.json was copied");
-        });
-    }
+    //console.log(req);
+    console.log(req);
+    let anomallyDetectionMethod = req.body[0].data.label
+
+
+    let reg_flight = req.files[1]
+
+
+
+
+    let fileWithAnomalies = req.files[0]
+
+
+    console.log("MAGNIVIM3");
+
+    model1.detectAnomalies(anomallyDetectionMethod, reg_flight, fileWithAnomalies)
+    console.log("MAGNIVIM4");
+    fs.copyFile("anomalies.json", "../view/src/anomalies.json", (err) => {
+        console.log("LOMAGNIVIM");
+        if (err) throw err;
+        console.log("anomalies.json was copied");
+    });
+    console.log("MAGNIVIM5");
+
     //res.write("dfdf")
     res.end()
+    console.log("MAGNIVIM6");
 })
 app.listen(3000)
 /*
