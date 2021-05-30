@@ -6,8 +6,8 @@ import axios from 'axios';
 
 
 const options=[
-    {label:"Hybrid",value:'op1'},
-    {label:"Regression",value:'op2'}
+    {label:"hybrid",value:'op1'},
+    {label:"regression",value:'op2'}
 ]
 
 
@@ -36,7 +36,7 @@ export default class Create extends Component {
     };
 
 
-    
+
 
 
 
@@ -63,9 +63,11 @@ export default class Create extends Component {
 
         formData1.append(
             "selection12",
-            this.state.select1
+            this.state.select1.label
+
         );
 
+        console.log(this.state.select1)
         axios
             .post('http://localhost:8080/detect', formData1)
             .then(() => console.log('posting Created'))
@@ -97,7 +99,7 @@ export default class Create extends Component {
                     <Select name="select1" id="select1" className="select_"  placeholder={'select detection type'}
                             isSearchable={false} options={options} onChange={this.onChangeSelect}>
                     </Select>
-                    </div>
+                </div>
 
                 <button value="UPLOAD" name="submit" onClick={this.handleSubmit} />
 
@@ -109,5 +111,3 @@ export default class Create extends Component {
         );
     }
 }
-
-

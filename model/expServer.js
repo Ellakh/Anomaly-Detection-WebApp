@@ -42,7 +42,7 @@ app.use(express.json());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-const model1 = require('../model/AnomalyDetectionModel');
+const model1 = require('./AnomalyDetectionModel');
 app.use(express.urlencoded({
     extended: false
 }))
@@ -91,7 +91,7 @@ app.post('/detect', (req, res)=>{
     //     }
     // })
     // console.log("2222222");
-    model1.detectAnomalies(anomallyDetectionMethod,reqFlightAbsolutePath, anomalyFlightAbsolutePath);
+    model1.detectAnomalies("Regression",reqFlightAbsolutePath, anomalyFlightAbsolutePath);
     // //console.log(fileWithAnomalies)
     //
     //

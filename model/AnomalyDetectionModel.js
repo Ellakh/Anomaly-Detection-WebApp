@@ -1,26 +1,17 @@
-//import App from "../view/src/App";
-
 const anomalyDetector = require("./build/Release/main");
 const fs = require("fs");
+const path = require("path");
 
-//detectAnomalies("regression", "reg_flight.csv", "anomaly_flight.csv")
+detectAnomalies("Regression", "./reg_flight.csv", "./anomaly_flight.csv");
 
 function detectAnomalies(detectorType, normalFile, anomalyFile) {
-	fs.writeFile("reg_file.csv", normalFile.data.toString(), function (err) {
-		if (err) {
-			throw err
-		}
-	})
-	fs.writeFile("anomaly_file.csv", anomalyFile.data.toString(), function (err) {
-		if (err) {
-			throw err
-		}
-	})
+	fs.copyFileSync(normalFile, "reg_file.csv");
+	fs.copyFileSync(anomalyFile, "anomaly_file.csv");
 	anomalyDetector.detect(detectorType, "reg_file.csv", "anomaly_file.csv", function (err,res) {
 		if (err) {
 			console.error(err)
 		} else {
-			fs.writeFile("anomalies.json", res , function (err) {
+			fs.writeFileSync("anomalies.json", res , function (err) {
 				if (err) {
 					throw err
 				}
@@ -34,5 +25,4 @@ function detectAnomalies(detectorType, normalFile, anomalyFile) {
 	})
 }
 module.exports.detectAnomalies = detectAnomalies
-//module.exports.anomalyDetector = anomalyDetector
-//module.exports.fs = fs
+
