@@ -12,7 +12,7 @@ In addition the user will receive a json file that includes a report of where th
 
 <h2>Directory hierarchy</h2>
 
-  <h2>Model
+  <h2>Model</h2>
   - The model is a folder of database storage, reading and writing from the database.
   - **AnomalyDetectionModel.js** copy and write and read from database 
    
