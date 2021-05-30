@@ -4,120 +4,103 @@ import React, { Component } from "react";
 import ResultData from './ResultJson';
 import axios from 'axios';
 
+
 const options=[
     {label:"Hybrid",value:'op1'},
     {label:"Regression",value:'op2'}
 ]
 
-const form = new FormData();
-
-const API_BASE = "http://localhost:3000"
 
 export default class Create extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            normal_file: '',
-            test_file: '',
-            select1:  '',
-        };
-    }
 
-    onNormFileUpload() {
-        form.append("normFile", normal_file);
-        //submitForm("multipart/form-data", formData, (msg) => console.log(msg));
-    }
+    state = {
 
-    onTestFileUpload() {
-        form.append("anomalyFile", test_file);
-        //submitForm("multipart/form-data", formData, (msg) => console.log(msg));
-    }
+        // Initially, no file is selected
+        selectedFile1: null,
+        selectedFile2: null,
+        select1: ''
+    };
+    // On file select (from the pop up)
+    onFileChange = event => {
 
-    onSelectAlgo() {
-        form.append("anomalyDetectionMethod", select1);
-        //
-    }
+        // Update the state
+        this.setState({ selectedFile1: event.target.files[0] });
 
-    onSubmitForm() {
-        //submitForm("multipart/form-data", form, (msg) => console.log(msg));
-
-        axios({
-            url: `${API_BASE}/detect`,
-            method: 'POST',
-            data: data,
-            headers: {
-                'Content-Type': contentType
-            }
-        }).then((response) => {
-            setResponse(response.data);
-        }).catch((error) => {
-            setResponse("error");
-        })
-    }
-
-
-//jhkl
-    handleInputChange = e => {
-        this.setState({
-            [e.target.name]: e.target.value,
-        });
     };
 
-    onChangeSelect = value => {
+    onFileChange1 = event => {
+
+        // Update the state
+        this.setState({ selectedFile2: event.target.files[0] });
+
+    };
+
+
+    
+
+
+
+    onChangeSelect = value  => {
         this.setState({ select1: value });
     }
 
-    onSubmit = () => {
-        const data = new FormData()
-        data.append('normal_file', this.state.normal_file)
-        data.append('test_file', this.state.test_file)
-        axios.post("http://localhost:3000/detect", data).then(res => {
-            //console.log(res.statusText)
-        })
-    }
-
-
-
     handleSubmit = e => {
         e.preventDefault();
-        const { normal_file, test_file, select1 } = this.state;
-        const posting = {
-            normal_file,
-            test_file,
-            select1,
-        };
-        console.log(normal_file);
+
+        // Create an object of formData
+        const formData1 = new FormData();
+
+        // Update the formData object
+        formData1.append(
+            "myFile1",
+            this.state.selectedFile1,
+        );
+
+        formData1.append(
+            "myFile2",
+            this.state.selectedFile2,
+        );
+
+        formData1.append(
+            "selection12",
+            this.state.select1
+        );
+
         axios
-            .post('http://localhost:3000/detect', posting)
+            .post('http://localhost:8080/detect', formData1)
             .then(() => console.log('posting Created'))
             .catch(err => {
                 console.error(err);
             });
     };
+
     render() {
         return (
             <div className="App">
                 <header className="App-header">
                     <h2>Anomaly Detection Server</h2>
                 </header>
-                <form onSubmit={this.onSubmitForm} encType="multipart/form-data" name="searchFrom" target="result" className="form_">
-                    <table className="Table_File">
-                        <tr>
-                            <td><input type="file" name="normal_file" id="normal_file" onChange={this.onNormFileUpload}/></td>
-                            <td>קובץ טיסה רגילה</td>
-                        </tr>
-                        <tr>
-                            <td><input type="file" name="test_file" id="test_file" onChange={this.onTestFileUpload} /></td>
-                            <td>קובץ טיסה לבדיקה</td>
-                        </tr>
-                    </table>
-                    <div>
-                        <Select name="select1" id="select1" className="select_"  placeholder={'select detection type'}
-                                isSearchable={false} options={options} onChange={this.onSelectAlgo}>
-                        </Select>
+
+
+                <table className="Table_File">
+                    <tr>
+                        <td><input type="file" name="normal_file" id="normal_file" onChange={this.onFileChange1}/></td>
+                        <td>קובץ טיסה רגילה</td>
+                    </tr>
+                    <tr>
+                        <td><input type="file" name="test_file" id="test_file" onChange={this.onFileChange} /></td>
+                        <td>קובץ טיסה לבדיקה</td>
+                    </tr>
+                </table>
+
+                <div>
+                    <Select name="select1" id="select1" className="select_"  placeholder={'select detection type'}
+                            isSearchable={false} options={options} onChange={this.onChangeSelect}>
+                    </Select>
                     </div>
-                    <input type="submit" value="UPLOAD" name="submit" />
-                </form>
+
+                <button value="UPLOAD" name="submit" onClick={this.handleSubmit} />
+
                 <h3>Anomaly List</h3>
                 <div className="result_">
                     <ResultData/>
